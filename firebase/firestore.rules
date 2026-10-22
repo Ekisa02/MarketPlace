@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() { return request.auth != null; }
+    function isSelf(uid) { return request.auth.uid == uid; }
+
+    match /users/{uid} {
+      allow read: if isSignedIn() && (isSelf(uid) || request.auth.token.admin == true);
+      allow create, update: if isSignedIn() && isSelf(uid);
+    }
+
+    match /workers/{uid} {
+      allow read: if isSignedIn();
+      allow create, update: if isSignedIn() && isSelf(uid);
+    }
+
+    match /jobs/{jobId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
+    }
+  }
+}

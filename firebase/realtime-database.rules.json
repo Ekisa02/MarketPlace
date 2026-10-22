@@ -1,0 +1,24 @@
+{
+  "rules": {
+    "chats": {
+      "$chatId": {
+        ".read": "auth != null && root.child('chats').child($chatId).child('members').child(auth.uid).exists()",
+        ".write": "auth != null && root.child('chats').child($chatId).child('members').child(auth.uid).exists()"
+      }
+    },
+    "userChats": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        "$chatId": {
+          ".write": "auth != null"
+        }
+      }
+    },
+    "notifications": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "database": {
+    "rules": "realtime-database.rules.json"
+  },
+  "hosting": {
+    "public": "../frontend/dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}
