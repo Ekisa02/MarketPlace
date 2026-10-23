@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import {
-  onAuthStateChanged,
-  signOut as fbSignOut
-} from 'firebase/auth';
+import { onAuthStateChanged, signOut as fbSignOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/config';
 
@@ -20,7 +17,8 @@ export function AuthProvider({ children }) {
         try {
           const snap = await getDoc(doc(db, 'users', fbUser.uid));
           setRole(snap.exists() ? snap.data().role : null);
-        } catch {
+        } catch (err) {
+          console.error("Error fetching user role:", err);
           setRole(null);
         }
       } else {

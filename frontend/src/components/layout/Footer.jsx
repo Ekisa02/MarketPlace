@@ -1,42 +1,82 @@
-import { Box, Container, Grid, Typography, Link, Stack, IconButton, Divider } from '@mui/material';
+import { Box, Container, Grid, Typography, Link as MuiLink, Divider, Stack, IconButton } from '@mui/material';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
+
+const FOOTER_LINKS = [
+  { title: 'For Clients', links: ['How to hire', 'Talent Marketplace', 'Project Catalog', 'Hire an Agency', 'Enterprise', 'Business Plus', 'Any Hire', 'Contract-to-Hire', 'Direct Contracts'] },
+  { title: 'For Talent', links: ['How to find work', 'Direct Contracts', 'Find Freelance Jobs Worldwide', 'Find Freelance Jobs in the USA', 'Win work with ads', 'Exclusive resources with Freelancer Plus'] },
+  { title: 'Resources', links: ['Help & support', 'Success stories', 'LocalPro reviews', 'Resources', 'Blog', 'Affiliate program', 'Free Business Tools', 'Release notes'] },
+  { title: 'Company', links: ['About us', 'Leadership', 'Investor relations', 'Careers', 'Our impact', 'Press', 'Contact us', 'Trust, safety & security', 'Modern slavery statement'] }
+];
 
 export default function Footer() {
   return (
-    <Box component="footer" sx={{ bgcolor: 'background.paper', borderTop: '1px solid', borderColor: 'divider', mt: 8, pt: 6, pb: 3 }}>
+    <Box sx={{ bgcolor: '#181818', color: 'white', pt: 8, pb: 4 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" sx={{ fontWeight: 800, color: 'primary.main', mb: 1 }}>LocalPro</Typography>
-            <Typography variant="body2" color="text.secondary">
-              Connecting verified local talent with employers who care about quality.
-            </Typography>
-          </Grid>
+        
+        {/* Top Columns */}
+        <Grid container spacing={4} sx={{ mb: 6 }}>
+          {FOOTER_LINKS.map((col) => (
+            <Grid item xs={6} md={2} key={col.title}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2, color: 'white' }}>
+                {col.title}
+              </Typography>
+              <Stack spacing={1}>
+                {col.links.map((link) => (
+                  <MuiLink 
+                    key={link} 
+                    href="#" 
+                    underline="hover" 
+                    sx={{ color: '#b0b0b0', fontSize: '0.875rem', '&:hover': { color: 'white' } }}
+                  >
+                    {link}
+                  </MuiLink>
+                ))}
+              </Stack>
+            </Grid>
+          ))}
+          
+          {/* Follow Us Column */}
           <Grid item xs={6} md={2}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>Company</Typography>
-            {['About', 'Careers', 'Press', 'Blog'].map((t) => (
-              <Link key={t} href="#" display="block" underline="hover" color="text.secondary" variant="body2" sx={{ mb: 0.5 }}>{t}</Link>
-            ))}
-          </Grid>
-          <Grid item xs={6} md={2}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>For Workers</Typography>
-            {['Get Verified', 'Payouts', 'Resources', 'Community'].map((t) => (
-              <Link key={t} href="#" display="block" underline="hover" color="text.secondary" variant="body2" sx={{ mb: 0.5 }}>{t}</Link>
-            ))}
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>Stay in the loop</Typography>
-            <Stack direction="row" spacing={1}>
-              {[Facebook, Twitter, Instagram, LinkedIn].map((Icon, i) => (
-                <IconButton key={i} size="small" color="primary"><Icon fontSize="small" /></IconButton>
-              ))}
-            </Stack>
+             <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 2, color: 'white' }}>
+               Follow us
+             </Typography>
+             <Stack direction="row" spacing={1}>
+                {[Facebook, Twitter, Instagram, LinkedIn].map((Icon, i) => (
+                  <IconButton 
+                    key={i} 
+                    size="small" 
+                    sx={{ color: '#b0b0b0', '&:hover': { color: 'white' } }}
+                  >
+                    <Icon fontSize="small" />
+                  </IconButton>
+                ))}
+             </Stack>
           </Grid>
         </Grid>
-        <Divider sx={{ my: 3 }} />
-        <Typography variant="caption" color="text.secondary" align="center" display="block">
-          © {new Date().getFullYear()} LocalPro. All rights reserved.
-        </Typography>
+        
+        {/* Divider */}
+        <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)', mb: 3 }} />
+        
+        {/* Bottom Bar */}
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: 2 }}>
+          <Typography variant="caption" sx={{ color: '#b0b0b0' }}>
+            © 2024 - 2026 LocalPro Global LLC
+          </Typography>
+          
+          <Stack direction="row" spacing={3}>
+             {['Terms of Service', 'Privacy Policy', 'CA Notice at Collection', 'Your Privacy Choices'].map((item) => (
+               <MuiLink 
+                 key={item} 
+                 href="#" 
+                 underline="hover" 
+                 sx={{ color: '#b0b0b0', fontSize: '0.75rem', '&:hover': { color: 'white' } }}
+               >
+                 {item}
+               </MuiLink>
+             ))}
+          </Stack>
+        </Box>
+
       </Container>
     </Box>
   );

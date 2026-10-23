@@ -1,7 +1,7 @@
 import client from './client';
 import { buildChatId, ensureChat, indexChatForUser } from './chat';
 
-
+export const listMyJobs = () => client.get('/jobs/my');
 export const listJobs = () => client.get('/jobs');
 export const createJob = (payload) => client.post('/jobs', payload);
 export const acceptJob = (jobId) => client.post(`/jobs/${jobId}/accept`);

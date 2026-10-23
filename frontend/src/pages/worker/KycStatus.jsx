@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Container, Paper, Typography, Button, Stack, Chip, Alert } from '@mui/material';
-import { useAuth } from '../../context/AuthContext';
-import { submitKyc, getKycStatus } from '../../api/workers';
+import { Container, Paper, Typography, Button, Stack, Chip, Alert, Box } from '@mui/material';
 import { getKycSignature, uploadToCloudinary } from '../../api/uploads';
+import { submitKyc, getKycStatus } from '../../api/workers';
+import { useAuth } from '../../context/AuthContext';
+import PageHeader from '../../components/common/PageHeader';
 import toast from 'react-hot-toast';
 
 export default function KycStatus() {
@@ -47,9 +48,10 @@ export default function KycStatus() {
     : status === 'rejected' ? 'error' : 'default';
 
   return (
-    <Container maxWidth="sm" sx={{ py: 6 }}>
-      <Paper sx={{ p: 4 }}>
-        <Typography variant="h4" gutterBottom>KYC Verification</Typography>
+    <Container maxWidth="sm" sx={{ py: 4 }}>
+      <PageHeader title="KYC Verification" backTo="/worker" />
+
+      <Paper sx={{ p: 4, borderRadius: 3, border: '1px solid #E5E7EB', boxShadow: 'none' }}>
         <Chip label={`Status: ${status}`} color={chipColor} sx={{ mb: 3 }} />
         {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
         {status !== 'approved' && (
@@ -62,7 +64,7 @@ export default function KycStatus() {
               <input hidden type="file" accept="image/*,application/pdf"
                 onChange={(e) => setFile(e.target.files?.[0] || null)} />
             </Button>
-            <Button variant="contained" onClick={submit} disabled={!file || uploading}>
+            <Button variant="contained" onClick={submit} disabled={!file || uploading} sx={{ bgcolor: '#00A86B', '&:hover': { bgcolor: '#008F5A' } }}>
               {uploading ? 'Uploading…' : 'Submit for Review'}
             </Button>
           </Stack>
