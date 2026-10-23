@@ -1,0 +1,9 @@
+cd C:\Users\user\local-services-marketplace
+@"
+* text=auto
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+"@ | Out-File -FilePath .gitattributes -Encoding utf8
